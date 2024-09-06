@@ -1,0 +1,10 @@
+name: MagicChopstick
+version: '1.0-SNAPSHOT'
+author: 'P.D. Cycle'
+main: club.cyclesn.magicChopstick.MagicChopstick
+api-version: '1.21'
+
+commands:
+  givechopstick:
+    description: Gives the player a magic wand
+    usage: /givechopstick
