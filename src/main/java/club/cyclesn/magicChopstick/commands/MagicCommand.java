@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static club.cyclesn.magicChopstick.items.BaseItems.BaseChopstick;
 
-public class MagicCommands implements CommandExecutor {
+public class MagicCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player player){

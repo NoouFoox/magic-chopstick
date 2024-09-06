@@ -1,9 +1,11 @@
 package club.cyclesn.magicChopstick;
 
+import club.cyclesn.magicChopstick.commands.MagicCommand;
 import club.cyclesn.magicChopstick.listeners.MagicListener;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 
 public final class MagicChopstick extends JavaPlugin {
     public static MagicChopstick plugin;
@@ -13,6 +15,7 @@ public final class MagicChopstick extends JavaPlugin {
         plugin = this;
         MagicChopstickKey = new NamespacedKey(this, "magic_chopstick");
         getServer().getPluginManager().registerEvents(new MagicListener(), this);
+        Objects.requireNonNull(getServer().getPluginCommand("givechopstick")).setExecutor(new MagicCommand());
         System.out.println("MagicChopstick loaded");
     }
     @Override
