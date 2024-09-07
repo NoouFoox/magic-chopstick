@@ -12,9 +12,8 @@ public class ItemUtils {
             return false;
         }
         ItemMeta meta = item.getItemMeta();
-        PersistentDataContainer data = null;
         if (meta != null) {
-            data = meta.getPersistentDataContainer();
+        PersistentDataContainer data = meta.getPersistentDataContainer();
             return type.equals(data.get(MagicChopstick.MagicChopstickKey, PersistentDataType.STRING));
         }
         return false;
