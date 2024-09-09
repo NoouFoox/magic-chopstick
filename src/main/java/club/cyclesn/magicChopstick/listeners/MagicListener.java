@@ -1,5 +1,6 @@
 package club.cyclesn.magicChopstick.listeners;
 
+import club.cyclesn.magicChopstick.MagicChopstick;
 import club.cyclesn.magicChopstick.items.Chopstick;
 import club.cyclesn.magicChopstick.items.BaseChopstick;
 import club.cyclesn.magicChopstick.items.chopsticks.WingChopstick;
@@ -28,7 +29,7 @@ public class MagicListener implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if (isMagicChopstick(item)) {
-            ArrayList<Chopstick> chopsticks = new ArrayList<>(Arrays.asList(new BaseChopstick(), new WingChopstick()));
+            ArrayList<Chopstick> chopsticks = MagicChopstick.chopsticks;
             chopsticks.stream().filter(c -> c.isEquals(item)).findFirst().ifPresent(chopstick -> {
                 chopstick.useSkill(player, item);
             });
