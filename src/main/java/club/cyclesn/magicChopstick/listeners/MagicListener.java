@@ -21,11 +21,10 @@ public class MagicListener implements Listener {
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
         Player player = event.getPlayer();
         if (isMagicChopstick(item)) {
-            player.sendMessage("§c???");
+            ArrayList<Chopstick> chopsticks = new ArrayList<>(Arrays.asList(new BaseChopstick(), new WingChopstick()));
+            chopsticks.stream().filter(c -> c.isEquals(item)).findFirst().ifPresent(chopstick -> {
+                chopstick.useSkill(player, item);
+            });
         }
-        ArrayList<Chopstick> chopsticks = new ArrayList<>(Arrays.asList(new BaseChopstick(), new WingChopstick()));
-        chopsticks.stream().filter(c -> c.isEquals(item)).findFirst().ifPresent(chopstick -> {
-            chopstick.useSkill(player, item);
-        });
     }
 }
