@@ -51,7 +51,7 @@ public abstract class Chopstick {
         return ItemUtils.isCustomItem(item, NAME_KEY);
     }
     public boolean isEquals(String displayName) {
-        return this.displayName.equals(displayName);
+        return this.NAME_KEY.equals(displayName);
     }
     public abstract void skill(@NotNull Player player, ItemStack item);
 

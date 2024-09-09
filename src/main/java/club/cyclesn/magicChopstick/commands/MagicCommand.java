@@ -14,6 +14,7 @@ public class MagicCommand implements CommandExecutor {
         if (commandSender instanceof Player player) {
             if (strings.length > 0) {
                 String type = strings[0].toLowerCase();
+                player.sendMessage("§6正在尝试获取法杖" + type);
                 Chopstick chopstick = MagicChopstick.chopsticks.stream().filter(c -> c.isEquals(type)).findFirst().orElse(null);
                 if (chopstick != null) {
                     player.getInventory().addItem(chopstick.getItem());

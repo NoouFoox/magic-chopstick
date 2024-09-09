@@ -34,6 +34,7 @@ public final class MagicChopstick extends JavaPlugin {
         Objects.requireNonNull(Bukkit.getPluginCommand("givechopstick")).setExecutor(new MagicCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("givechopstick")).setTabCompleter(new MagicCommandCompleter());
         chopsticks = PluginUtils.getAllChopsticks();
+        System.out.println("Loaded " + chopsticks.size() + " chopsticks");
         System.out.println("MagicChopstick enabled");
     }
 
