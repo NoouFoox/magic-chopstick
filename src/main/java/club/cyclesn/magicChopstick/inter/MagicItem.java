@@ -1,4 +1,4 @@
-package inter;
+package club.cyclesn.magicChopstick.inter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

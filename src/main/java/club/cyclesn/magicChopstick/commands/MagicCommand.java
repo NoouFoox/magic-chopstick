@@ -10,7 +10,7 @@ public class MagicCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player player){
-            player.getInventory().addItem(new BaseChopstick().getItem());
+//            player.getInventory().addItem(new BaseChopstick().getItem());
             player.sendMessage("§6获得了一个基础魔法筷子");
             return true;
         }
