@@ -13,8 +13,6 @@ public class ItemUtils {
         PersistentDataContainer data = null;
         if (meta != null) {
             data = meta.getPersistentDataContainer();
-        }
-        if (data != null) {
             return type.equals(data.get(MagicChopstick.MagicChopstickKey, PersistentDataType.STRING));
         }
         return false;
