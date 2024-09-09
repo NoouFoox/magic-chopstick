@@ -1,28 +1,38 @@
 package club.cyclesn.magicChopstick.listeners;
 
+import club.cyclesn.magicChopstick.MagicChopstick;
+import club.cyclesn.magicChopstick.items.Chopstick;
+import club.cyclesn.magicChopstick.items.BaseChopstick;
+import club.cyclesn.magicChopstick.items.chopsticks.WingChopstick;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import static club.cyclesn.magicChopstick.items.BaseItems.BASE_CHOPSTICK_KEY;
-import static club.cyclesn.magicChopstick.items.ItemUtils.isCustomItem;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
+
+import static club.cyclesn.magicChopstick.items.ItemUtils.isMagicChopstick;
 
 public class MagicListener implements Listener {
-    // 冷却时间
-    private static final int BASE_CHOPSTICK_COOL_DOWN_TICKS = 100;
+    private static final EnumSet<Action> VALID_ACTIONS = EnumSet.of(Action.RIGHT_CLICK_AIR, Action.RIGHT_CLICK_BLOCK);
     @EventHandler
     public void onPlayerUseWand(@NotNull PlayerInteractEvent event) {
-        ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if (isCustomItem(item, BASE_CHOPSTICK_KEY)) {
-            Player player = event.getPlayer();
-            if(player.hasCooldown(item.getType())){
-                return;
-            }
-            player.getWorld().strikeLightning(player.getTargetBlock(null, 50).getLocation());
-            player.setCooldown(item.getType(), BASE_CHOPSTICK_COOL_DOWN_TICKS);
+        Action action = event.getAction();
+        if (!VALID_ACTIONS.contains(action)) {
+            return;
+        }
+        Player player = event.getPlayer();
+        ItemStack item = player.getInventory().getItemInMainHand();
+        if (isMagicChopstick(item)) {
+            ArrayList<Chopstick> chopsticks = MagicChopstick.chopsticks;
+            chopsticks.stream().filter(c -> c.isEquals(item)).findFirst().ifPresent(chopstick -> {
+                chopstick.useSkill(player, item);
+            });
         }
     }
 }
