@@ -18,4 +18,15 @@ public class ItemUtils {
         }
         return false;
     }
+    static public boolean isMagicChopstick(ItemStack item) {
+        if (item == null || !item.hasItemMeta()) {
+            return false;
+        }
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            PersistentDataContainer data = meta.getPersistentDataContainer();
+            return data.has(MagicChopstick.MagicChopstickKey, PersistentDataType.STRING);
+        }
+        return false;
+    }
 }
