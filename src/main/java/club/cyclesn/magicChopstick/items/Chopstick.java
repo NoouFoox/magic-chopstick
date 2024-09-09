@@ -9,17 +9,17 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractChopstick {
+public abstract class Chopstick {
     private final String NAME_KEY;
     private final int COOL_TICKS;
     private final String displayName;
     private Material material = Material.STICK;
-    public AbstractChopstick(String NAME_KEY, int COOL_TICKS, String displayName) {
+    public Chopstick(String NAME_KEY, int COOL_TICKS, String displayName) {
         this.NAME_KEY = NAME_KEY;
         this.COOL_TICKS = COOL_TICKS;
         this.displayName = displayName;
     }
-    public AbstractChopstick(String NAME_KEY, int COOL_TICKS, String displayName, Material material) {
+    public Chopstick(String NAME_KEY, int COOL_TICKS, String displayName, Material material) {
         this.NAME_KEY = NAME_KEY;
         this.COOL_TICKS = COOL_TICKS;
         this.displayName = displayName;
