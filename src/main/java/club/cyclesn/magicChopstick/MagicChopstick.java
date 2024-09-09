@@ -1,6 +1,7 @@
 package club.cyclesn.magicChopstick;
 
 import club.cyclesn.magicChopstick.commands.MagicCommand;
+import club.cyclesn.magicChopstick.commands.MagicCommandCompleter;
 import club.cyclesn.magicChopstick.items.Chopstick;
 import club.cyclesn.magicChopstick.lib.MagicTimerHash;
 import club.cyclesn.magicChopstick.lib.PluginUtils;
@@ -31,6 +32,7 @@ public final class MagicChopstick extends JavaPlugin {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new MagicListener(), this);
         Objects.requireNonNull(Bukkit.getPluginCommand("givechopstick")).setExecutor(new MagicCommand());
+        Objects.requireNonNull(Bukkit.getPluginCommand("givechopstick")).setTabCompleter(new MagicCommandCompleter());
         chopsticks = PluginUtils.getAllChopsticks();
         System.out.println("MagicChopstick enabled");
     }

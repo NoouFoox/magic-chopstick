@@ -14,6 +14,11 @@ public abstract class Chopstick {
     private final int COOL_TICKS;
     private final String displayName;
     private Material material = Material.STICK;
+
+    public String getNAME_KEY() {
+        return NAME_KEY;
+    }
+
     public Chopstick(String NAME_KEY, int COOL_TICKS, String displayName) {
         this.NAME_KEY = NAME_KEY;
         this.COOL_TICKS = COOL_TICKS;
@@ -38,10 +43,16 @@ public abstract class Chopstick {
         return item;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
     public boolean isEquals(ItemStack item) {
         return ItemUtils.isCustomItem(item, NAME_KEY);
     }
-
+    public boolean isEquals(String displayName) {
+        return this.displayName.equals(displayName);
+    }
     public abstract void skill(@NotNull Player player, ItemStack item);
 
     public void useSkill(@NotNull Player player, @NotNull ItemStack item) {
