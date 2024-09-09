@@ -8,7 +8,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 public class ItemUtils {
-    static public boolean isCustomItem(ItemStack item, String type) {
+    static public boolean isCustomItem(@NotNull ItemStack item, String type) {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer data = null;
         if (meta != null) {
