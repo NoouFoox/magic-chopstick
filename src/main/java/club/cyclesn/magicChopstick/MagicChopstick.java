@@ -10,8 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 
 public final class MagicChopstick extends JavaPlugin {
@@ -19,6 +18,8 @@ public final class MagicChopstick extends JavaPlugin {
     public static NamespacedKey MagicChopstickKey;
     public static MagicTimerHash magicTimerHash;
     public static ArrayList<Chopstick> chopsticks;
+    //    通用冷却时间
+    public static  Map<UUID, Map<String, Long>> cooldowns = new HashMap<>();
 
     @Override
     public void onLoad() {

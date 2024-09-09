@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 @MagicItem
 public class WingChopstick extends Chopstick {
     public WingChopstick() {
-        super("chopstick_wing", 25, "§c飞来杖");
+        super("chopstick_wing", 3, "§c飞来杖");
     }
 
     @Override

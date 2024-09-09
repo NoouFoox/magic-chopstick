@@ -1,6 +1,8 @@
 package club.cyclesn.magicChopstick.items;
 
 import club.cyclesn.magicChopstick.MagicChopstick;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -9,9 +11,14 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public abstract class Chopstick {
     private final String NAME_KEY;
-    private final int COOL_TICKS;
+    private final int COOL_SECONDS;
+    ;
     private final String displayName;
     private Material material = Material.STICK;
 
@@ -19,14 +26,15 @@ public abstract class Chopstick {
         return NAME_KEY;
     }
 
-    public Chopstick(String NAME_KEY, int COOL_TICKS, String displayName) {
+    public Chopstick(String NAME_KEY, int COOL_SECONDS, String displayName) {
         this.NAME_KEY = NAME_KEY;
-        this.COOL_TICKS = COOL_TICKS;
+        this.COOL_SECONDS = COOL_SECONDS;
         this.displayName = displayName;
     }
-    public Chopstick(String NAME_KEY, int COOL_TICKS, String displayName, Material material) {
+
+    public Chopstick(String NAME_KEY, int COOL_SECONDS, String displayName, Material material) {
         this.NAME_KEY = NAME_KEY;
-        this.COOL_TICKS = COOL_TICKS;
+        this.COOL_SECONDS = COOL_SECONDS;
         this.displayName = displayName;
         this.material = material;
     }
@@ -50,16 +58,30 @@ public abstract class Chopstick {
     public boolean isEquals(ItemStack item) {
         return ItemUtils.isCustomItem(item, NAME_KEY);
     }
+
     public boolean isEquals(String displayName) {
         return this.NAME_KEY.equals(displayName);
     }
+
     public abstract void skill(@NotNull Player player, ItemStack item);
 
     public void useSkill(@NotNull Player player, @NotNull ItemStack item) {
-        if (player.hasCooldown(item.getType())) {
-            return;
+        UUID playerId = player.getUniqueId();
+        long currentTime = System.currentTimeMillis();
+        int coolTime = this.COOL_SECONDS * 1000;
+        Map<String, Long> playerCools = MagicChopstick.cooldowns.getOrDefault(playerId, new HashMap<>());
+        if (playerCools.containsKey(this.NAME_KEY)) {
+            long lastUsed = playerCools.get(this.NAME_KEY);
+            double coldRemaining = (double) (coolTime - (currentTime - lastUsed)) / 1000;
+            if (coldRemaining > 0) {
+                String formattedCool = String.format("%.2f", coldRemaining);
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new TextComponent("§e冷却中: " + formattedCool + " 秒"));
+                return;
+            }
         }
-        player.setCooldown(item.getType(), COOL_TICKS);
+        playerCools.put(this.NAME_KEY, currentTime);
+        MagicChopstick.cooldowns.put(playerId, playerCools);
         skill(player, item);
     }
 }

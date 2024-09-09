@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 @MagicItem
 public class BaseChopstick extends Chopstick {
     public BaseChopstick() {
-        super("chopstick_base", 20, "§6基础法杖");
+        super("chopstick_base", 1, "§6基础法杖");
     }
     @Override
     public void skill(@NotNull Player player, ItemStack item) {
