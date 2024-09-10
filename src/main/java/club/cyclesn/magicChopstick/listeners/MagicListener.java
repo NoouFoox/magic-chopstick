@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +32,7 @@ public class MagicListener implements Listener {
         if (isMagicChopstick(item)) {
             ArrayList<Chopstick> chopsticks = MagicChopstick.chopsticks;
             chopsticks.stream().filter(c -> c.isEquals(item)).findFirst().ifPresent(chopstick -> {
-                chopstick.useSkill(player, item);
+                chopstick.useSkill(player, item, event);
             });
         }
     }
