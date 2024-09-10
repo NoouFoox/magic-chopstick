@@ -2,6 +2,7 @@ package club.cyclesn.magicChopstick.items.chopsticks;
 
 import club.cyclesn.magicChopstick.inter.MagicItem;
 import club.cyclesn.magicChopstick.items.Chopstick;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -25,28 +26,21 @@ public class WingChopstick extends Chopstick {
 
     @Override
     public void skill(@NotNull Player player, ItemStack item, PlayerEvent event) {
-        double range = 20.0; // 法杖射程
-        double step = 0.5; // 粒子移动的步长
-        // 获取玩家视线方向
-        Vector direction = player.getEyeLocation().getDirection().normalize();
-        Location startLocation = player.getEyeLocation(); // 粒子发射起点
-        Location currentLocation = startLocation.clone(); // 粒子当前位置
-        // 模拟粒子沿着视线移动
+        double range = 20.0;
+        double step = 0.5;
+
+        Location startLocation = player.getEyeLocation();
+        Location currentLocation = startLocation.clone();
         for (double distance = 0; distance < range; distance += step) {
-            currentLocation.add(direction.multiply(step));
-
-            // 生成粒子效果
-            player.getWorld().spawnParticle(Particle.DUST, currentLocation, 1);
-
-            // 检测当前位置是否有实体
+            currentLocation.add(startLocation.getDirection().multiply(step));
+            player.getWorld().spawnParticle(Particle.DUST, currentLocation, 1, new Particle.DustOptions(Color.BLUE, 1));
             Entity entity = getNearbyEntity(currentLocation, player);
             if (entity != null) {
-                // 如果有实体，施加漂浮效果
                 if (entity instanceof LivingEntity livingEntity) {
                     livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 100, 1)); // 5秒漂浮
-                    player.sendMessage("§b你对 " + livingEntity.getName() + " 使用了漂浮术！");
+//                    player.sendMessage("§b你对 " + livingEntity.getName() + " 使用了漂浮术！");
                 }
-                return; // 施法结束后停止
+                return;
             }
         }
     }
@@ -60,6 +54,6 @@ public class WingChopstick extends Chopstick {
                 }
             }
         }
-        return null;
+        return null; // 未找到实体
     }
 }
