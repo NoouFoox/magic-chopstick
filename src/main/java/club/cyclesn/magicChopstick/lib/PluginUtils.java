@@ -14,7 +14,7 @@ import java.util.Set;
 public class PluginUtils {
     public static @NotNull List<Class<?>> getAnnotatedItemClasses(Class<? extends Annotation> annotation) {
         List<Class<?>> itemClasses = new ArrayList<>();
-        Reflections reflections = new Reflections("club.cyclesn.magicChopstick"); // 替换为实际的包名
+        Reflections reflections = new Reflections("club.cyclesn.magicChopstick");
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(annotation);
         for (Class<?> clazz : classes) {
             if (!Modifier.isAbstract(clazz.getModifiers())) {
