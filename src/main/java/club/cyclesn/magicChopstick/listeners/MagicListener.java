@@ -4,6 +4,7 @@ import club.cyclesn.magicChopstick.MagicChopstick;
 import club.cyclesn.magicChopstick.items.Chopstick;
 import club.cyclesn.magicChopstick.items.BaseChopstick;
 import club.cyclesn.magicChopstick.items.chopsticks.WingChopstick;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
